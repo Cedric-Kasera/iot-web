@@ -3,6 +3,16 @@ import "./Main.css"
 
 function Card({ reading }) {
 
+  const formattedTime = new Date(reading.timestamp).toLocaleString("en-US", {
+    month: "short",           // e.g., "Jul"
+    day: "2-digit",           // e.g., 02
+    hour: "numeric",          // e.g., 7 or 10
+    minute: "2-digit",        // e.g., 50
+    second: "2-digit",        // optional
+    hour12: true              // shows AM/PM
+  });
+
+
   return (
     <div className="card">
       <h3 className="card-header">
@@ -13,10 +23,10 @@ function Card({ reading }) {
         <span>
           Temperature:
         </span>
-        {reading.temperature} degrees
+        {reading.temperature} °C
       </p>
       <span className="card-footer">
-        {new Date(reading.timestamp).toLocaleTimeString()}
+        {formattedTime}
       </span>
     </div>
   )
