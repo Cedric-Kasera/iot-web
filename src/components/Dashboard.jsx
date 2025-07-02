@@ -4,7 +4,10 @@ import { WebSocketContext } from '../WebSocketContext'
 import "./Main.css"
 
 function Dashboard() {
-    const { readings } = useContext(WebSocketContext);
+    const { readingsMap } = useContext(WebSocketContext);
+
+    // Convert readingsMap object to an array of readings
+    const readings = Object.values(readingsMap);
 
     return (
         <div className="App">

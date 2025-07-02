@@ -3,27 +3,28 @@ import React, { createContext, useEffect, useRef, useState } from "react";
 export const WebSocketContext = createContext();
 
 export const WebSocketProvider = ({ children }) => {
-  const [readings, setReadings] = useState([]);
+  const [readingsMap, setReadingsMap] = useState({});
   const ws = useRef(null);
 
   useEffect(() => {
-    // 1. Connect to WebSocket server
-    ws.current = new WebSocket("https://iot-584n.onrender.com");
+    ws.current = new WebSocket("wss://iot-584n.onrender.com"); // use wss not https
 
     ws.current.onopen = () => {
       console.log("[WebSocket] Connected to server");
     };
 
-    // 2. On message received
     ws.current.onmessage = (event) => {
       try {
-        const data = JSON.parse(event.data);
-        console.log("[WebSocket] Received:", data);
+        const newReading = JSON.parse(event.data);
+        console.log("[WebSocket] Received:", newReading);
 
-        // 3. Add new reading at top
-        setReadings((prev) => [data, ...prev.slice(0, 49)]); // Limit to 50 readings
+        // Update or insert based on groupName
+        setReadingsMap((prev) => ({
+          ...prev,
+          [newReading.groupName]: newReading,
+        }));
       } catch (err) {
-        console.error("Invalid message:", event.data);
+        console.error("Invalid WebSocket data:", event.data);
       }
     };
 
@@ -35,14 +36,13 @@ export const WebSocketProvider = ({ children }) => {
       console.error("[WebSocket] Error:", err);
     };
 
-    // Cleanup on unmount
     return () => {
       ws.current.close();
     };
   }, []);
 
   return (
-    <WebSocketContext.Provider value={{ readings }}>
+    <WebSocketContext.Provider value={{ readingsMap }}>
       {children}
     </WebSocketContext.Provider>
   );
