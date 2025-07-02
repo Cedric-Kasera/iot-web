@@ -1,0 +1,43 @@
+.navbar {
+    background-color: #2196F3;
+    color: white;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar h1 {
+    font-weight: 500;
+    font-size: x-large;
+}
+
+.card-section {
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    transition: transform 0.2s;
+    padding: 2rem;
+    border: black;
+}
+
+.card .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card p {
+    margin-top: 1rem;
+    font-weight: 400;
+    font-size: large;
+    color: gray;
+}
