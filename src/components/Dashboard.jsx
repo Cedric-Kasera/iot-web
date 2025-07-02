@@ -3,34 +3,11 @@ import Card from './Card'
 import { WebSocketContext } from '../WebSocketContext'
 import "./Main.css"
 
-const readings = [
-    {
-        "groupName": "group1",
-        "temperature": 23.75,
-        "timestamp": "2025-07-02T07:50:11.487Z"
-    },
-    {
-        "groupName": "group1",
-        "temperature": 23.75,
-        "timestamp": "2025-07-02T07:50:11.487Z"
-    },
-    {
-        "groupName": "group1",
-        "temperature": 23.75,
-        "timestamp": "2025-07-02T07:50:11.487Z"
-    },
-    {
-        "groupName": "group1",
-        "temperature": 23.75,
-        "timestamp": "2025-07-02T07:50:11.487Z"
-    }
-]
-
 function Dashboard() {
     const { readingsMap } = useContext(WebSocketContext);
 
     // Convert readingsMap object to an array of readings
-    // const readings = Object.values(readingsMap);
+    const readings = Object.values(readingsMap);
 
     return (
         <div className="App">
