@@ -2,15 +2,22 @@ import React from 'react'
 import "./Main.css"
 
 function Card({ reading }) {
+
   return (
-    <div className="card bg-white rounded-xl shadow-md p-4 border border-gray-100 hover:shadow-lg transition">
-      <div className="card-header flex justify-between items-center">
-        <h3 className="text-lg font-bold text-indigo-600">{reading.groupId}</h3>
-        <span className="text-sm text-gray-500">
-          {reading.timestamp}
+    <div className="card">
+      <h3 className="card-header">
+        <span>Group Name: </span>
+        {reading.groupName}
+      </h3>
+      <p className="card-header">
+        <span>
+          Temperature:
         </span>
-      </div>
-      <p className="mt-2 text-gray-700 text-lg font-semibold">{reading.data}</p>
+        {reading.temperature} degrees
+      </p>
+      <span className="card-footer">
+        {new Date(reading.timestamp).toLocaleTimeString()}
+      </span>
     </div>
   )
 }
